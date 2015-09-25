@@ -1,5 +1,7 @@
 <?php
 
-$conf['test'] = '1';
+//$conf['namespaces'] = 'indexcd';
+$conf['default_controller'] = 'indexcd';
+$conf['default_method'] = 'indexmd';
 
 return $conf;

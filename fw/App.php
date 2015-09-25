@@ -6,11 +6,18 @@ include 'Loader.php';
 use FW\App as Application;
 use FW\Loader as Loader;
 use FW\Config as Config;
+use FW\FrontController as FrontController;
 
 class App {
 
-	private static $_instance = null;
-	private $_config = null;
+    private static $_instance = null;
+    private $_config = null;
+
+    /**
+     *
+     * @var FrontController
+     */
+    private $_frontController = null;
 
     private function __construct()
 	{
@@ -35,10 +42,14 @@ class App {
 		return $this->_config;
 	}
 	
-    public function run() {
+    public function run()
+    {
         if ($this->_config->getConfigFolder() == null) {
 			$this->setConfigFolder('../config');
 		}
+        
+        $this->_frontController = FrontController::getInstance();
+        $this->_frontController->dispatch();
 	}
 
 	/**

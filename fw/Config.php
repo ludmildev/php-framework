@@ -2,6 +2,7 @@
 namespace FW;
 
 use FW\Config as Config;
+use FW\Loader as Loader;
 
 class Config {
     
@@ -29,6 +30,12 @@ class Config {
         {
             $this->_configArray = array();
             $this->_configFolder = $_configFolder . DIRECTORY_SEPARATOR;
+            
+            $namespaces = isset($this->app['namespaces']) ? $this->app['namespaces'] : null;
+            
+            if (is_array($namespaces)) {
+                Loader::registerNamespace($namespaces);
+            }
         } else {
             throw new \Exception('Config directory read error: ' . $configFolder);
         }
