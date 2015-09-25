@@ -26,6 +26,11 @@ class App {
 	public function getConfigFolder() {
 		return $this->_config->_configFolder;
 	}
+	
+	/**
+	*
+	* @return Config
+	*/
 	public function getConfig() {
 		return $this->_config;
 	}
