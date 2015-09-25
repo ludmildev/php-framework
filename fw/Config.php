@@ -13,6 +13,10 @@ class Config {
         
     }
     
+	public function getConfigFolder() {
+		return $this->_configFolder;
+	}
+	
     public function setConfigFolder($configFolder)
     {
         if (!$configFolder) {
@@ -43,9 +47,7 @@ class Config {
         {
             $_basename = explode('.php', basename($_file))[0];
             
-            include $_file;
-            
-            $this->_configArray[$_basename] = $conf;
+            $this->_configArray[$_basename] = include $_file;;
         } else {
             //TODO
             throw new \Exception('Config file read error : ' . $path);
