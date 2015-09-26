@@ -17,6 +17,10 @@ class App {
     private $_config = null;
     private $_router = null;
     private $_dbConnection = null;
+    /**
+     *
+     * @var Sessions\ISession
+     */
     private $_session = null;
 
     /**
@@ -82,10 +86,21 @@ class App {
         
         if ($_sess['autostart'])
         {
-            switch($_sess['type']) {
+            switch($_sess['type'])
+            {
+                case 'database':
+                    $s = new Sessions\DBSession(
+                        $_sess['dbConnection'], 
+                        $_sess['name'], 
+                        $_sess['dbTable'], 
+                        $_sess['lifetime'], 
+                        $_sess['path'], 
+                        $_sess['domain'], 
+                        $_sess['secure']
+                    );
+                    break;
                 case 'native':
-                default:
-                    $s = $this->_session = new Sessions\NativeSession(
+                    $s = new Sessions\NativeSession(
                         $_sess['name'], 
                         $_sess['lifetime'], 
                         $_sess['path'], 
@@ -93,6 +108,8 @@ class App {
                         $_sess['secure']
                     );
                     break;
+                default:
+                    throw new \Exception('No Valid Session', 500);
             }
             
             $this->setSession($s);
@@ -147,4 +164,10 @@ class App {
 
 		return self::$_instance;
 	}
+    
+    public function __destruct() {
+        if (!empty($this->_session)) {
+            $this->_session->saveSession();
+        }
+    }
 }
