@@ -34,7 +34,7 @@ class Config {
             $namespaces = isset($this->app['namespaces']) ? $this->app['namespaces'] : null;
             
             if (is_array($namespaces)) {
-                Loader::registerNamespace($namespaces);
+                Loader::registerNamespaces($namespaces);
             }
         } else {
             throw new \Exception('Config directory read error: ' . $configFolder);

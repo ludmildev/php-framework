@@ -8,28 +8,47 @@ use FW\Routers\DefaultRouter as DefaultRouter;
 class FrontController {
     
     private static $_instance = null;
-    
+    private $namespace = null;
+    private $controller = null;
+    private $method = null;
+
+
     private function __construct() {
     
     }
     
-    public function dispatch() {
+    public function dispatch()
+    {
         
         $router = new DefaultRouter();
         
-        $router->parse();
+        $_uri = $router->getURI();
         
-        $controller = $router->getController();
-        $method = $router->getMethod();
+        $routes = App::getInstance()->getConfig()->routes;
         
-        if ($controller == null) {
-            $controller = $this->getDefaultController();
+        if (is_array($routes) && count($routes) > 0)
+        {
+            foreach ($routes as $key => $val)
+            {
+                if (stripos($_uri, $key) === 0 && ($_uri == $key || stripos($_uri, $key.'/') === 0) && $val['namespace'])
+                {
+                    $this->namespace = $val['namespace'];
+                    break;
+                }
+            }
+            echo $this->namespace;
+        } 
+        else {
+            //TODO
+            throw new \Exception('Default Route missing', 500);
         }
-        if ($method == null) {
-            $method = $this->getDefaultMethod();
-        }
         
-        echo $controller . ' - ' . $method;
+        if ($this->namespace == null && $routes['*']['namespace']) {
+            $this->namespace = $routes['*']['namespace'];
+        }
+        elseif ($this->namespace == null && !$routes['*']['namespace']) {
+            throw new \Exception('Default Route missing', 500);
+        }
     }
     
     public function getDefaultController()
