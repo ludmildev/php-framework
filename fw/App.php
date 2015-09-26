@@ -9,6 +9,7 @@ use FW\Config as Config;
 use FW\FrontController as FrontController;
 use FW\Routers\DefaultRouter as DefaultRouter;
 use FW\Routers\IRouter as IRouter;
+use FW\Sessions as Sessions;
 
 class App {
 
@@ -16,6 +17,7 @@ class App {
     private $_config = null;
     private $_router = null;
     private $_dbConnection = null;
+    private $_session = null;
 
     /**
      *
@@ -55,10 +57,10 @@ class App {
 	
     public function run()
     {
-        if (empty($this->getConfigFolder())) {
+        if (empty($this->_config->getConfigFolder())) {
 			$this->setConfigFolder('../config');
 		}
-        
+
         $this->_frontController = FrontController::getInstance();
         
         if ($this->_router instanceof IRouter) {
@@ -75,8 +77,40 @@ class App {
                     break;
             }
         }
+        
+        $_sess = $this->getConfig()->app['session'];
+        
+        if ($_sess['autostart'])
+        {
+            switch($_sess['type']) {
+                case 'native':
+                default:
+                    $s = $this->_session = new Sessions\NativeSession(
+                        $_sess['name'], 
+                        $_sess['lifetime'], 
+                        $_sess['path'], 
+                        $_sess['domain'], 
+                        $_sess['secure']
+                    );
+                    break;
+            }
+            
+            $this->setSession($s);
+        }
+        
         $this->_frontController->dispatch();
 	}
+    
+    public function setSession(Sessions\ISession $session) {
+        $this->_session = $session;
+    }
+    /**
+     * 
+     * @return Sessions\ISession
+     */
+    public function getSession() {
+        return $this->_session;
+    }
     
     public function getConnection($connectionType = 'default')
     {

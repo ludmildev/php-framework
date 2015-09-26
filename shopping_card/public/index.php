@@ -3,9 +3,11 @@ include '../../fw/App.php';
 
 $app = \FW\App::getInstance();
 
-//$config = \FW\Config::getInstance();
-//$config->setConfigFolder('../config');
+//$db = new \FW\Db\SimpleDb();
+//$users = $db->prepare('SELECT * FROM users WHERE user_id = ?',[1])->execute()->fetchAllAssoc();
+//echo '<pre>' . print_r($users, true) . '</pre>';
 
 $app->run();
 
-var_dump($app->getConnection());
+$app->getSession()->counter+=1;
+echo $app->getSession()->counter;
