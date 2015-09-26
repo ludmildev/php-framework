@@ -14,7 +14,8 @@ class App {
 
     private static $_instance = null;
     private $_config = null;
-    private $router = null;
+    private $_router = null;
+    private $_dbConnection = null;
 
     /**
      *
@@ -34,14 +35,14 @@ class App {
 		$this->_config->setConfigFolder($path);
 	}
 	public function getConfigFolder() {
-		return $this->_config->_configFolder;
+		return $this->_config->getConfigFolder();
 	}
 	function getRouter() {
-        return $this->router;
+        return $this->_router;
     }
 
     function setRouter($router) {
-        $this->router = $router;
+        $this->_router = $router;
     }
 
     	/**
@@ -54,18 +55,18 @@ class App {
 	
     public function run()
     {
-        if ($this->_config->getConfigFolder() == null) {
+        if (empty($this->getConfigFolder())) {
 			$this->setConfigFolder('../config');
 		}
         
         $this->_frontController = FrontController::getInstance();
         
-        if ($this->router instanceof IRouter) {
-            $this->_frontController->setRouter($this->router);
+        if ($this->_router instanceof IRouter) {
+            $this->_frontController->setRouter($this->_router);
         }
         else
         {
-            switch ($this->router)
+            switch ($this->_router)
             {
                 case 'jsonRPC':
                 case 'cli':
@@ -76,6 +77,29 @@ class App {
         }
         $this->_frontController->dispatch();
 	}
+    
+    public function getConnection($connectionType = 'default')
+    {
+        if (empty($connectionType)) {
+            throw new \Exception('No identification connection provided.', 500);
+        }
+        if (!empty($this->_dbConnection[$connectionType]))
+            return $this->_dbConnection[$connectionType];
+        
+        $conf = $this->getConfig()->database;
+        
+        if (empty($conf[$connectionType])) {
+            throw new \Exception('No valid identification connection provided.', 500);
+        }
+        
+        $connection = $conf[$connectionType];
+        
+        $dbh = new \PDO($connection['url'], $connection['username'], $connection['pass'], $connection['pdo_options']);
+        
+        $this->_dbConnection[$connectionType] = $dbh;
+        
+        return $dbh;
+    }
 
 	/**
 	*
