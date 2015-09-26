@@ -15,6 +15,6 @@ $conf['session']['dbConnection'] = 'default';
 $conf['session']['dbTable'] = 'sessions';
 
 
-$conf['viewsDirectory'] = 'views';
+$conf['viewsDirectory'] = '../views/';
 
 return $conf;

@@ -8,6 +8,8 @@ class Index {
         
         $view = \FW\View::getInstance();
         
-        $view->display('index');
+        $view->appendToLayout('body', 'home.index');
+        
+        $view->display('layouts.default');
     }
 }
