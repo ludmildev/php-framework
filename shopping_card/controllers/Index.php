@@ -5,6 +5,9 @@ namespace Controllers;
 class Index {
     
     public function index() {
-        echo 'Index page';
+        
+        $view = \FW\View::getInstance();
+        
+        $view->display('index');
     }
 }

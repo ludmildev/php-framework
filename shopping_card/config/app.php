@@ -14,4 +14,7 @@ $conf['session']['secure'] = false;
 $conf['session']['dbConnection'] = 'default';
 $conf['session']['dbTable'] = 'sessions';
 
+
+$conf['viewsDirectory'] = 'views';
+
 return $conf;
