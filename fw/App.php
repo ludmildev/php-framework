@@ -31,10 +31,16 @@ class App {
 
     private function __construct()
 	{
+        set_exception_handler(array($this), '_exceptionHandler');
+        
         Loader::registerNamespace('FW', dirname(__FILE__).DIRECTORY_SEPARATOR);
         Loader::registerAutoLoad();
 		
 		$this->_config = Config::getInstance();
+        
+        if (empty($this->_config->getConfigFolder())) {
+			$this->setConfigFolder('../config');
+		}
     }
 
 	public function setConfigFolder($path) {
@@ -61,10 +67,6 @@ class App {
 	
     public function run()
     {
-        if (empty($this->_config->getConfigFolder())) {
-			$this->setConfigFolder('../config');
-		}
-
         $this->_frontController = FrontController::getInstance();
         
         if ($this->_router instanceof IRouter) {
@@ -164,6 +166,27 @@ class App {
 
 		return self::$_instance;
 	}
+    
+    public function _exceptionHandler(\Exception $ex)
+    {        
+        if ($this->_config && $this->_config->app['displayExceptions'] == true) {
+            echo '<pre>' . print_r($ex, true) . '</pre>';
+        } else {
+            $this->displayError($ex->getCode());
+        }
+    }
+    
+    public function displayError($error)
+    {
+        try {
+            $view = \FW\View::getInstance();
+            $view->display('errors.' . $error);
+        } catch (\Exception $exc) {
+            \FW\Common::headerStatus($error);
+            echo '<h1>' . $error . '</h1>';
+            exit;
+        }
+    }
     
     public function __destruct() {
         if (!empty($this->_session)) {
