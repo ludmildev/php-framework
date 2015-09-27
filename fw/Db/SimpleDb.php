@@ -53,9 +53,6 @@ class SimpleDb {
         if (!empty($params)) {
             $this->params = $params;
         }
-//        if ($this->logSQL) {
-//            \FW\Logger::getInstace()->set($this->sql . ' '.print_r($this->params, true), 'db');
-//        }
         
         $this->stmt->execute($this->params);
         
