@@ -4,6 +4,7 @@ namespace FW;
 use FW\App as App;
 use FW\FrontController as FrontController;
 use FW\Routers\IRouter as IRouter;
+use FW\InputData as InputData;
 
 class FrontController {
     
@@ -11,6 +12,11 @@ class FrontController {
     private $namespace = null;
     private $controller = null;
     private $method = null;
+    
+    /**
+     *
+     * @var IRouter
+     */
     private $router = null;
 
     function getRouter() {
@@ -62,6 +68,8 @@ class FrontController {
         
         $_params = explode('/', $_uri);
         
+        $input = InputData::getInstance();
+        
         if ($_params[0])
         {
             $this->controller = strtolower($_params[0]);
@@ -70,7 +78,7 @@ class FrontController {
             {
                 $this->method = strtolower($_params[1]);
                 unset($_params[0], $_params[1]);
-                
+                $input->setGet(array_values($_params));
                 $this->params = array_values($_params);
             }
             else {
@@ -92,6 +100,8 @@ class FrontController {
             if (!empty($_rc['controllers'][$this->controller]['to']))
                 $this->controller = strtolower($_rc['controllers'][$this->controller]['to']);
         }
+        
+        $input->setPost($this->router->getPost());
         
         $controller = $this->namespace . '\\' . ucfirst($this->controller);
         $newController = new $controller();
