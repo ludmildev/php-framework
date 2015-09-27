@@ -1,12 +1,13 @@
 <?php
-
 namespace Controllers;
 
-class Index {
+use FW\DefaultController as DefaultController;
+
+class Index extends DefaultController {
     
     public function index() {
         
-        $view = \FW\View::getInstance();
+        $view = $this->view;
         
         $view->appendToLayout('body', 'home.index');
         

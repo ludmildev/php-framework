@@ -31,7 +31,7 @@ class App {
 
     private function __construct()
 	{
-        set_exception_handler(array($this), '_exceptionHandler');
+        set_exception_handler(array($this, '_exceptionHandler'));
         
         Loader::registerNamespace('FW', dirname(__FILE__).DIRECTORY_SEPARATOR);
         Loader::registerAutoLoad();
