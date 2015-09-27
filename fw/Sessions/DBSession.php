@@ -25,7 +25,7 @@ class DBSession extends SimpleDb implements ISession {
         $this->path = $path;
         $this->domain = $domain;
         $this->secure = $secure;
-        $this->sessionId = $_COOKIE[$name];
+        $this->sessionId = !empty($_COOKIE[$name]) ? $_COOKIE[$name] : null;
         
         if (rand(0, 51) == 1) {
             $this->_cleanData();
