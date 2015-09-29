@@ -87,10 +87,10 @@ class FrontController {
         }
         else
         {
-            $this->controller = 'index';
+            $this->controller = 'Index';
             $this->method = 'index';
         }
-        
+
         if (is_array($_rc) && !empty($_rc['controllers']))
         {
             if (!empty($_rc['controllers'][$this->controller]['methods'][$this->method])) {
@@ -100,7 +100,6 @@ class FrontController {
             if (!empty($_rc['controllers'][$this->controller]['to']))
                 $this->controller = strtolower($_rc['controllers'][$this->controller]['to']);
         }
-        
         $input->setPost($this->router->getPost());
         
         $controller = $this->namespace . '\\' . ucfirst($this->controller);

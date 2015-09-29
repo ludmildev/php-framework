@@ -4,7 +4,7 @@ $conf['default_method'] = 'indexmd';
 $conf['namespaces']['Controllers'] = 'C:\xampp\htdocs\framework\trunk\shopping_card\controllers';
 
 $conf['session']['autostart'] = true;
-$conf['session']['type'] = 'database';
+$conf['session']['type'] = 'native';
 $conf['session']['name'] = '__sess';
 $conf['session']['lifetime'] = 3600;
 $conf['session']['path'] = '/';
@@ -15,6 +15,7 @@ $conf['session']['dbConnection'] = 'default';
 $conf['session']['dbTable'] = 'sessions';
 
 
-$conf['viewsDirectory'] = '../views/';
+$conf['viewsDirectory']     = '../views/';
+$conf['displayExceptions']  = true;
 
 return $conf;

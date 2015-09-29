@@ -10,6 +10,7 @@ use FW\FrontController as FrontController;
 use FW\Routers\DefaultRouter as DefaultRouter;
 use FW\Routers\IRouter as IRouter;
 use FW\Sessions as Sessions;
+use Models\Users as Users;
 
 class App {
 
@@ -186,6 +187,31 @@ class App {
             echo '<h1>' . $error . '</h1>';
             exit;
         }
+    }
+    
+    public function getUsername()
+    {
+        return $this->_session->username;
+    }
+
+    public function isLogged()
+    {
+        return !empty($this->_session->username);
+    }
+
+    public function isAdmin()
+    {
+        return !empty($this->_session->isAdmin) ? (bool)$this->_session->isAdmin : false;
+    }
+
+    public function isEditor()
+    {
+        return !empty($this->_session->isEditor) ? (bool)$this->_session->isEditor : false;
+    }
+
+    public function isModerator()
+    {
+        return !empty($this->_session->isModerator) ? (bool)$this->_session->isModerator : false;
     }
     
     public function __destruct() {
