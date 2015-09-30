@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class Products {
+class Products extends \FW\DefaultController {
     
     
     public function index() {

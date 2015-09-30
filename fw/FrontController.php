@@ -38,7 +38,7 @@ class FrontController {
         
         $_uri = $this->router->getURI();
         $routes = App::getInstance()->getConfig()->routes;
-        $_rc = null;
+        $_defaultConfigRoutes = null;
         
         if (is_array($routes) && count($routes) > 0)
         {
@@ -48,7 +48,7 @@ class FrontController {
                 {
                     $this->namespace = $val['namespace'];
                     $_uri = substr($_uri, strlen($key)+1);
-                    $_rc = $val;
+                    $_defaultConfigRoutes = $val;
                     break;
                 }
             }
@@ -60,7 +60,7 @@ class FrontController {
         
         if ($this->namespace == null && $routes['*']['namespace']) {
             $this->namespace = $routes['*']['namespace'];
-            $_rc = $routes['*'];
+            $_defaultConfigRoutes = $routes['*'];
         }
         elseif ($this->namespace == null && !$routes['*']['namespace']) {
             throw new \Exception('Default Route missing', 500);
@@ -91,14 +91,19 @@ class FrontController {
             $this->method = 'index';
         }
 
-        if (is_array($_rc) && !empty($_rc['controllers']))
+        if (is_array($_defaultConfigRoutes) && !empty($_defaultConfigRoutes['controllers']))
         {
-            if (!empty($_rc['controllers'][$this->controller]['methods'][$this->method])) {
-                $this->method = strtolower($_rc['controllers'][$this->controller]['methods'][$this->method]);
+            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method])) {
+                $this->method = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method]);
             }
 
-            if (!empty($_rc['controllers'][$this->controller]['to']))
-                $this->controller = strtolower($_rc['controllers'][$this->controller]['to']);
+            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['to']))
+                $this->controller = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['to']);
+
+            if (empty($_defaultConfigRoutes['controllers'][strtolower($this->controller)])) {
+                App::getInstance()->displayError(404);
+                exit;
+            }
         }
         $input->setPost($this->router->getPost());
         
