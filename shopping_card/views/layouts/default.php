@@ -13,7 +13,12 @@
                         <li><a href="/categories/">All Categories</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/signin">Link / Register</a></li>
+                        <?php if (!$this->isLogged) { ?>
+                            <li><a href="/signin">Link / Register</a></li>
+                        <?php } else { ?>
+                            <li><a href="/card">Card</a></li>
+                            <li><a href="/profile"><?php echo $this->username;?></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

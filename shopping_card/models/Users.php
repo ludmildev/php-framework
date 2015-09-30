@@ -20,12 +20,16 @@ class Users  {
         if (empty($result)) {
             return ['success' => 0, 'message' => 'Invalid Username or password provided!', 'code' => 400];
         }
+        
+        $session = \FW\App::getInstance()->getSession();
 
-        $this->session->userId = $result['id'];
-        $this->session->username = $result['username'];
-        $this->session->isAdmin = $result['isAdmin'];
-        $this->session->isEditor = $result['isEditor'];
-        $this->session->isModerator = $result['isModerator'];
+        $session->userId = $result['id'];
+        $session->username = $result['username'];
+        $session->isAdmin = $result['isAdmin'];
+        $session->isEditor = $result['isEditor'];
+        $session->isModerator = $result['isModerator'];
+        
+        $session->saveSession();
         
         return ['success' => 1, 'message' => ''];
     }

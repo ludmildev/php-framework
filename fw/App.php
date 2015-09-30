@@ -10,7 +10,6 @@ use FW\FrontController as FrontController;
 use FW\Routers\DefaultRouter as DefaultRouter;
 use FW\Routers\IRouter as IRouter;
 use FW\Sessions as Sessions;
-use Models\Users as Users;
 
 class App {
 

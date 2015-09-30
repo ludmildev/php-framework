@@ -4,7 +4,7 @@ namespace Controllers;
 use FW\InputData as InputData;
 
 class User extends \FW\DefaultController {
-    
+
     public function login()
     {
         $username = InputData::getInstance()->post('username', 'string', '');

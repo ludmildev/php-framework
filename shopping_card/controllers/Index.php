@@ -13,6 +13,6 @@ class Index extends DefaultController {
         
         $view->appendToLayout('body', 'home.index');
         
-        $view->display('layouts.default', array('isLogged' => 'da'));
+        $view->display('layouts.default');
     }
 }

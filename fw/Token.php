@@ -33,7 +33,7 @@ class Token
         echo $html;
     }
 
-    public static function validates($token)
+    public static function validate($token)
     {
         $isValid = (bool)(self::$session->_token === $token);
         self::generateToken();

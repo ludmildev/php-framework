@@ -12,6 +12,7 @@ class FrontController {
     private $namespace = null;
     private $controller = null;
     private $method = null;
+    private $_requestMethod = null;
     
     /**
      *
@@ -36,6 +37,21 @@ class FrontController {
             throw new \Exception('No Valid Router Found', 500);
         }
         
+        $this->_requestMethod = strtolower($this->router->getRequestMethod());
+
+        if ($this->_requestMethod != 'get')
+        {
+            $token = $this->router->getPost()['_token'];
+            $tokenOblect = Token::init();
+            
+            if (!$tokenOblect->validate($token)) {
+                throw new \Exception('Invalid token!', 400);
+            }
+            if (!empty($this->router->getPost()['_method'])) {
+                $this->_requestMethod = strtolower($this->router->getPost()['_method']);
+            }
+        }
+        
         $_uri = $this->router->getURI();
         $routes = App::getInstance()->getConfig()->routes;
         $_defaultConfigRoutes = null;
@@ -52,7 +68,7 @@ class FrontController {
                     break;
                 }
             }
-        } 
+        }
         else {
             //TODO
             throw new \Exception('Default Route missing', 500);

@@ -16,7 +16,7 @@ $conf['session']['dbConnection'] = 'default';
 $conf['session']['dbTable'] = 'sessions';
 
 $conf['viewsDirectory']     = '../views/';
-$conf['displayExceptions']  = false;
+$conf['displayExceptions']  = true;
 
 $conf['session']['initialCash'] = 10000;
 
