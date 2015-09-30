@@ -9,7 +9,7 @@ class View {
     private static $_instance = null;
     private $___viewPath = null;
     private $___viewDir = null;
-    private $___data = array();
+    private $_viewData = array();
     private $___extention = '.php';
     private $___layoutParts = array();
     private $___layoutData = array();
@@ -26,7 +26,7 @@ class View {
     public function display($name, $data = array(), $returnAsString = false)
     {
         if (is_array($data)) {
-            $this->___data = array_merge($this->___data, $data);
+            $this->_viewData = array_merge($this->_viewData, $data);
         }
         
         if (count($this->___layoutParts) > 0)
@@ -100,10 +100,10 @@ class View {
     }
     
     public function __get($name) {
-        return !empty($this->___data[$name]) ? $this->___data[$name] : null;
+        return !empty($this->_viewData[$name]) ? $this->_viewData[$name] : null;
     }
     public function __set($name, $value) {
-        $this->___data[$name] = $value;
+        $this->_viewData[$name] = $value;
     }
     
     /**

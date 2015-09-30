@@ -5,7 +5,6 @@ use FW\App as App;
 use FW\Config as Config;
 use FW\InputData as InputData;
 use FW\Sessions\ISession as ISession;
-use FW\Db\SimpleDb as SimpleDb;
 
 class DefaultController {
     
