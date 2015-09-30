@@ -1,4 +1,5 @@
 <?php
+namespace Controllers;
 
 use FW\InputData as InputData;
 
@@ -9,8 +10,11 @@ class User extends \FW\DefaultController {
         $username = InputData::getInstance()->post('username', 'string', '');
         $password = InputData::getInstance()->post('password', 'string', '');
         
-        $bindingModel = \Models\BindingModels\Login($username, $password);
-        
+        $bindingModel = new \Models\BindingModels\Login(array(
+            'username' => $username,
+            'password' => $password
+        ));
+
         $result = \Models\Users::login($bindingModel);
         
         if ($result['success'] == 0) {

@@ -1,11 +1,13 @@
 <?php
 namespace Models;
 
-class Users {
+class Users  {
     
     public static function login(\Models\BindingModels\Login $model)
     {
-        $result = $this->db->prepare("
+        $db = new \FW\Db\SimpleDb();
+
+        $result = $db->prepare("
             SELECT 
                 id, username, isAdmin, isEditor, isModerator
             FROM users
