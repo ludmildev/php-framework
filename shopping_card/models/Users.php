@@ -17,7 +17,6 @@ class Users {
         
         if (empty($result)) {
             return ['success' => 0, 'message' => 'Invalid Username or password provided!', 'code' => 400];
-            //throw new \Exception('Invalid Username or password provided!', 400);
         }
 
         $this->session->userId = $result['id'];

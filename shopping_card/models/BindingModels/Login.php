@@ -6,7 +6,7 @@ class Login
     private $username;
     private $password;
 
-    function __construct(array $params)
+    public function __construct(array $params)
     {
         $this->setPassword($params['password']);
         $this->setUsername($params['username']);
@@ -41,6 +41,6 @@ class Login
      */
     private function setPassword($password)
     {
-        $this->password = md5($password);
+        $this->password = $password;
     }
 }
