@@ -16,4 +16,17 @@ class Categories extends \FW\DefaultController {
             'categories' => $viewModel->getAll()
         ));
     }
+    
+    public function show()
+    {
+        $view = $this->view;
+        
+        $products = \Models\Products::getById();
+        
+        $view->appendToLayout('body', 'products');
+        
+        $view->display('layouts.default', array(
+            'products' => $products
+        ));
+    }
 }
