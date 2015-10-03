@@ -9,6 +9,7 @@ $conf['admin']['controllers']['test']['methods']['new'] = '_new';
 $conf['*']['namespace'] = 'Controllers';
 
 $conf['*']['controllers']['index']['to'] = 'index';
+
 $conf['*']['controllers']['products']['to'] = 'products';
 
 $conf['*']['controllers']['signin']['to'] = 'signin';
@@ -17,5 +18,6 @@ $conf['*']['controllers']['signup']['to'] = 'signin';
 $conf['*']['controllers']['user']['to'] = 'user';
 
 $conf['*']['controllers']['categories']['to'] = 'categories';
+
 
 return $conf;

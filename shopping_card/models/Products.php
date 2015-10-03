@@ -11,7 +11,10 @@ class Products {
         $db = new \FW\Db\SimpleDb();
         
         $products = $db->prepare("
-        SELECT p.id, p.name, p.description, p.price, p.quantity
+        SELECT 
+            p.id, p.name, p.description, p.price, 
+            p.quantity, c.name AS categoryName,
+            c.id as categoryId
         FROM products p
         JOIN products_categories pc
             ON p.id = pc.productId

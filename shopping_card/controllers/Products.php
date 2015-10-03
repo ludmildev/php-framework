@@ -5,7 +5,7 @@ namespace Controllers;
 class Products extends \FW\DefaultController {
     
     
-    public function all() {
+    public function index() {
         
         $view = $this->view;
         

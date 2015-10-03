@@ -18,6 +18,6 @@ class Signin extends \FW\DefaultController {
         
         $view->appendToLayout('body', 'user.login');
         
-        $view->display('layouts.default', array('isLogged' => 'da'));
+        $view->display('layouts.default');
     }
 }

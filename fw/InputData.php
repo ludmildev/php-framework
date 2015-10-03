@@ -8,7 +8,7 @@ use FW\Common as Common;
 class InputData {
     
     private static $_instance = null;
-    private $_get = null;
+    private $_get = array();
     private $_post = null;
     private $_cookies = null;
     
@@ -30,7 +30,7 @@ class InputData {
     public function hasPost($name) {
         return array_key_exists($name, $this->_post);
     }
-    public function hasGet($id) {
+    public function hasGet($id = null) {
         return array_key_exists($id, $this->_get);
     }
     public function hasCookies($name) {
