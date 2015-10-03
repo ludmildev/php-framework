@@ -3,10 +3,10 @@ namespace Models;
 
 class Products {
     
-    public static function getAll($start = 0, $end = 1)
+    public static function getAll($start = 0, $end = 10)
     {   
         $skip = $start < 2 ? 0 : $start;
-        $take = ($end < 1 ? 1 : $end) - $skip;
+        $take = ($end < 1 ? 10 : $end) - $skip;
         
         $db = new \FW\Db\SimpleDb();
         
