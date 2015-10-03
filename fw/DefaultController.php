@@ -43,7 +43,12 @@ class DefaultController {
         $this->input = InputData::getInstance();
         $this->session = $this->app->getSession();
         
-        $this->view->isLogged = empty($this->session->getSessionId()) ? false : true;
+        $this->view->isLogged = $this->session->isLogged;
+        
+        if ($this->session->isLogged)
+        {
+            $this->view->username = $this->session->username;
+        }
     }
     
     public function jsonResponse(){

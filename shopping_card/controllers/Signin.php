@@ -6,7 +6,7 @@ class Signin extends \FW\DefaultController {
     public function __construct() {
         parent::__construct();
         
-        if (!empty($this->session->getSessionId())) {
+        if (!empty($this->session->userId)) {
             $this->redirect('/');
             exit;
         }

@@ -16,4 +16,6 @@ $conf['*']['controllers']['signup']['to'] = 'signin';
 
 $conf['*']['controllers']['user']['to'] = 'user';
 
+$conf['*']['controllers']['categories']['to'] = 'categories';
+
 return $conf;

@@ -28,6 +28,7 @@ class Users  {
         $session->isAdmin = $result['isAdmin'];
         $session->isEditor = $result['isEditor'];
         $session->isModerator = $result['isModerator'];
+        $session->isLogged = true;
         
         $session->saveSession();
         
