@@ -1,12 +1,12 @@
 <script>
-function sentCart(id) {
+function addToCart(id) {
     $.ajax({
         method: "GET",
         url: "/cart/add/" + id,
         data: {}
     }).done(
         function () {
-            window.location.replace('/cart')
+            alert('Product added to card');
         }
     );
 }
@@ -32,7 +32,7 @@ function sentCart(id) {
                 </a>
             </div>
             <?php if($this->isLogged) { ?>
-                <a href="javascript:void(0);" onclick="alert('add to card not implemented');" class="btn btn-info">Add to cart!</a>
+                <a href="javascript:void(0);" onclick="addToCart(<?php echo $product['id']; ?>);" class="btn btn-info">Add to cart!</a>
             <?php } else { ?>
                 <a href="/signin" class="btn btn-info">Login to add to cart!</a>
             <?php } ?>

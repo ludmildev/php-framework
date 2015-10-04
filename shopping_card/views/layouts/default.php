@@ -16,7 +16,7 @@
                         <?php if (!$this->isLogged) { ?>
                             <li><a href="/signin">Link / Register</a></li>
                         <?php } else { ?>
-                            <li><a href="/card">Card</a></li>
+                            <li><a href="/cart">Card</a></li>
                             <li><a href="/profile"><?php echo $this->username;?></a></li>
                             <li><a href="/profile/logout">[Logout]</a></li>
                         <?php } ?>

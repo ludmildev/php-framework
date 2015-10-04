@@ -19,7 +19,7 @@ $conf['*']['controllers']['user']['to'] = 'user';
 
 $conf['*']['controllers']['categories']['to'] = 'categories';
 $conf['*']['controllers']['profile']['to'] = 'profile';
-$conf['*']['controllers']['card']['to'] = 'card';
+$conf['*']['controllers']['cart']['to'] = 'cart';
 
 
 return $conf;
