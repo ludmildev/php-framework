@@ -1,3 +1,16 @@
+<script>
+function sentCart(id) {
+    $.ajax({
+        method: "GET",
+        url: "/cart/add/" + id,
+        data: {}
+    }).done(
+        function () {
+            window.location.replace('/cart')
+        }
+    );
+}
+</script>
 <div class="container siteContainer">
     <?php if (count($this->products)<1) { ?>
         No Products Found

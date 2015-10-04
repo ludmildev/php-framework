@@ -1,13 +1,13 @@
 <?php
 namespace Controllers;
 
-class Card extends \FW\DefaultController {
+class Cart extends \FW\DefaultController {
     
     public function index()
     {
         $view = $this->view;
         
-        $view->appendToLayout('body', 'card.index');
+        $view->appendToLayout('body', 'cart.index');
         
         $view->display('layouts.default');
     }
