@@ -27,7 +27,6 @@ class Cart extends \FW\DefaultController {
     
     public function add()
     {
-        $view = $this->view;
         $productId = \FW\InputData::getInstance()->get(0);
         
         if (!$productId) {
@@ -36,4 +35,15 @@ class Cart extends \FW\DefaultController {
 
         \Models\Card::add($productId);
     }
+    public function remove()
+    {
+        $productId = \FW\InputData::getInstance()->get(0);
+        
+        if (!$productId) {
+            throw new \Exception('Invalid product details');
+        }
+
+        \Models\Card::remove($productId);
+    }
+    
 }

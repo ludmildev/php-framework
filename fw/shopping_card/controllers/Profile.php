@@ -3,6 +3,15 @@ namespace Controllers;
 
 class Profile extends \FW\DefaultController {
     
+    function __construct() {
+        parent::__construct();
+        
+        if (!$this->session->isLogged)  {
+            $this->redirect('/');
+            exit;
+        }
+    }
+
     public function index()
     {
         $view = $this->view;

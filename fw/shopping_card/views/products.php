@@ -1,8 +1,8 @@
 <script>
-function addToCart(id) {
+function addToCart(productId) {
     $.ajax({
         method: "GET",
-        url: "/cart/add/" + id,
+        url: "/cart/add/" + productId,
         data: {}
     }).done(
         function () {
@@ -19,7 +19,7 @@ function addToCart(id) {
     <div class="panel panel-success col-lg-4" style="margin-right: 10px;">
         <div class="panel-heading">
             <h3 class="panel-title">
-                <a href="/product/<?php echo $product['id']; ?>/show"><?php echo $product['name']; ?></a>
+                <a href="/product/show/<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a>
             </h3>
         </div>
         <div class="panel-body">
