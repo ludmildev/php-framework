@@ -18,6 +18,8 @@ $conf['*']['controllers']['signup']['to'] = 'signin';
 $conf['*']['controllers']['user']['to'] = 'user';
 
 $conf['*']['controllers']['categories']['to'] = 'categories';
+$conf['*']['controllers']['profile']['to'] = 'profile';
+$conf['*']['controllers']['card']['to'] = 'card';
 
 
 return $conf;

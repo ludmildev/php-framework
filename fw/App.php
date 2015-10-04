@@ -213,7 +213,8 @@ class App {
         return !empty($this->_session->isModerator) ? (bool)$this->_session->isModerator : false;
     }
     
-    public function __destruct() {
+    public function __destruct()
+    {
         if (!empty($this->_session)) {
             $this->_session->saveSession();
         }

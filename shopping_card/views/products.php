@@ -19,7 +19,7 @@
                 </a>
             </div>
             <?php if($this->isLogged) { ?>
-                <a href="javascript:void(0);" onclick="alert('added to card');" class="btn btn-info">Add to cart!</a>
+                <a href="javascript:void(0);" onclick="alert('add to card not implemented');" class="btn btn-info">Add to cart!</a>
             <?php } else { ?>
                 <a href="/signin" class="btn btn-info">Login to add to cart!</a>
             <?php } ?>
