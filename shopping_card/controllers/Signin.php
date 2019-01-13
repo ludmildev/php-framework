@@ -14,10 +14,6 @@ class Signin extends \FW\DefaultController {
     
     public function index()
     {
-        $view = $this->view;
-        
-        $view->appendToLayout('body', 'user.login');
-        
-        $view->display('layouts.default');
+        $this->view->appendToLayout('user.login')->display('layout');
     }
 }

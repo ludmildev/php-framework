@@ -13,14 +13,10 @@ class Cart extends \FW\DefaultController {
     }
     
     public function index()
-    {
-        $view = $this->view;
-        
+    {   
         $products = $this->session->cart;
-        
-        $view->appendToLayout('body', 'cart.index');
-        
-        $view->display('layouts.default', array(
+
+        $this->view->appendToLayout('cart.index')->display('layout', array(
             'products' => $products
         ));
     }

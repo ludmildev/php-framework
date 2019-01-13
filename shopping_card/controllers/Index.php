@@ -6,13 +6,9 @@ use FW\DefaultController as DefaultController;
 class Index extends DefaultController {
     
     public function index()
-    {
-        $view = $this->view;
+    {   
+        $this->view->test = 'test';
         
-        $view->test = 'test';
-        
-        $view->appendToLayout('body', 'home.index');
-        
-        $view->display('layouts.default');
+        $this->view->appendToLayout('home.index')->display('layout');
     }
 }

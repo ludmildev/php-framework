@@ -21,7 +21,7 @@ class User extends \FW\DefaultController {
         )));
 
         if ($result['success'] == 0) {
-            throw new \Exception('Invalid Username or password provided!', $result['code']);
+            throw new \Exception($result['message'], $result['code']);
         }
 
         $this->redirect('/');

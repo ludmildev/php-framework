@@ -1,8 +1,10 @@
 <?php
 $conf['default_controller'] = 'Index';
-$conf['default_method'] = 'indexmd';
-$conf['namespaces']['Controllers'] = 'C:\xampp\htdocs\framework\trunk\shopping_card\controllers';
-$conf['namespaces']['Models'] = 'C:\xampp\htdocs\framework\trunk\shopping_card\models';
+$conf['default_method'] = 'index';
+$conf['default_layout'] = 'default';
+
+$conf['namespaces']['Controllers'] = '..'.DIRECTORY_SEPARATOR.'controllers';
+$conf['namespaces']['Models'] = '..'.DIRECTORY_SEPARATOR.'models';
 
 $conf['session']['autostart'] = true;
 $conf['session']['type'] = 'native';
@@ -15,7 +17,7 @@ $conf['session']['secure'] = false;
 $conf['session']['dbConnection'] = 'default';
 $conf['session']['dbTable'] = 'sessions';
 
-$conf['viewsDirectory']     = '../views/';
+$conf['viewsDirectory']     = '..'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR;
 $conf['displayExceptions']  = true;
 
 $conf['defaultCash'] = 10000;

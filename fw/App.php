@@ -172,18 +172,18 @@ class App {
         if ($this->_config && $this->_config->app['displayExceptions'] == true) {
             echo '<pre>' . print_r($ex, true) . '</pre>';
         } else {
-            $this->displayError($ex->getCode());
+            $this->displayError($ex->getCode(), $ex->getMessage());
         }
     }
     
-    public function displayError($error)
+    public function displayError($code, $message = null)
     {
         try {
             $view = \FW\View::getInstance();
-            $view->display('errors.' . $error);
+            $view->display('errors.' . $code, $message);
         } catch (\Exception $exc) {
-            \FW\Common::headerStatus($error);
-            echo '<h1>' . $error . '</h1>';
+            \FW\Common::headerStatus($code);
+            echo '<h1>' . $message . ' - ' . $code . '</h1>';
             exit;
         }
     }

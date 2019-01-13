@@ -13,12 +13,8 @@ class Profile extends \FW\DefaultController {
     }
 
     public function index()
-    {
-        $view = $this->view;
-        
-        $view->appendToLayout('body', 'profile');
-        
-        $view->display('layouts.default');
+    {   
+        $this->view->appendToLayout('profile')->display('layout');
     }
     
     public function logout()

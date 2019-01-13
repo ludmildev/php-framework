@@ -11,12 +11,15 @@ class View {
     private $___viewDir = null;
     private $_viewData = array();
     private $___extention = '.php';
+
+    private $___layout = '';
     private $___layoutParts = array();
     private $___layoutData = array();
     
     private function __construct()
     {
         $this->___viewPath = App::getInstance()->getConfig()->app['viewsDirectory'];
+        $this->___layout = App::getInstance()->getConfig()->app['default_layout'];
         
         if (empty($this->___viewPath)) {
             $this->___viewPath = realpath('../views/');
@@ -48,28 +51,43 @@ class View {
         }
     }
     
-    public function appendToLayout($key, $template)
+    public function changeLayout($layout) {
+        if (!empty($layout)) {
+            $this->___layout = $layout;
+        } else {
+            throw new \Exception('Invalid Layout', 500);
+        }
+
+        return self::$_instance;
+    }
+
+    public function appendToLayout($template, $key = 'body')
     {
         if (!empty($key) && !empty($template)) {
             $this->___layoutParts[$key] = $template;
         } else {
             throw new \Exception('Invalid Layout', 500);
         }
+
+        return self::$_instance;
     }
     
     public function getLayoutData($name) {
         return $this->___layoutData[$name];
     }
 
-
     private function _includeFile($file) 
     {
         if (empty($this->___viewDir)) {
             $this->setViewDirectory($this->___viewPath);
         }
+
+        if (empty($this->___layout)) {
+            throw new \Exception('Layout not found', 500);
+        }
         
-        $___fl = $this->___viewDir . str_replace('.', DIRECTORY_SEPARATOR, $file) . $this->___extention;
-        
+        $___fl = $this->___viewDir . $this->___layout . DIRECTORY_SEPARATOR . str_replace('.', DIRECTORY_SEPARATOR, $file) . $this->___extention;
+
         if (file_exists($___fl) && is_readable($___fl))
         {
             ob_start();

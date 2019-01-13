@@ -3,8 +3,9 @@
 /* $conf['package/another']['namespace'] = 'Controllers\Admin'; */
 
 $conf['admin']['namespace'] = 'Controllers\Admin';
-$conf['admin']['controllers']['test']['to'] = 'index';
-$conf['admin']['controllers']['test']['methods']['new'] = '_new';
+$conf['admin']['controllers']['index']['to'] = 'index';
+//$conf['admin']['controllers']['index']['methods']['new'] = '_new';
+
 
 $conf['*']['namespace'] = 'Controllers';
 
