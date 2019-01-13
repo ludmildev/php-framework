@@ -39,7 +39,7 @@ class App {
 		$this->_config = Config::getInstance();
         
         if (empty($this->_config->getConfigFolder())) {
-			$this->setConfigFolder('../config');
+			$this->setConfigFolder('..'.DIRECTORY_SEPARATOR.'config');
 		}
     }
 
@@ -167,7 +167,7 @@ class App {
 		return self::$_instance;
 	}
     
-    public function _exceptionHandler(\Exception $ex)
+    public function _exceptionHandler($ex)
     {        
         if ($this->_config && $this->_config->app['displayExceptions'] == true) {
             echo '<pre>' . print_r($ex, true) . '</pre>';

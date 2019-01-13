@@ -117,7 +117,7 @@ class FrontController {
                 $this->controller = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['to']);
 
             if (empty($_defaultConfigRoutes['controllers'][strtolower($this->controller)])) {
-                App::getInstance()->displayError(404);
+                App::getInstance()->displayError(404, 'Page not found');
                 exit;
             }
         }
@@ -125,8 +125,15 @@ class FrontController {
         
         $controller = $this->namespace . '\\' . ucfirst($this->controller);
         $newController = new $controller();
+        $methodVar = array($newController, $this->method);
         
-        $newController->{$this->method}();
+        if (is_callable($methodVar)) {
+            $newController->{$this->method}();
+        } else {
+            App::getInstance()->displayError(404, 'Page not found!');
+            exit;
+        }
+        
     }
     
     public function getDefaultController()

@@ -5,14 +5,14 @@ class Index extends \FW\DefaultController {
     
     public function index() 
     {
-        $this->view->appendToLayout('admin.index')->display('layout', array(
+        $this->view->changeLayout('admin')->appendToLayout('index')->display('layout', array(
 
         ));
     }
 
-    public function new() {
+    public function tralala() {
 
-        $this->view->appendToLayout('admin.index')->display('layout', array(
+        $this->view->changeLayout('admin')->appendToLayout('index')->display('layout', array(
 
         ));
     }

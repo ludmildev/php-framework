@@ -4,7 +4,7 @@
 
 $conf['admin']['namespace'] = 'Controllers\Admin';
 $conf['admin']['controllers']['index']['to'] = 'index';
-//$conf['admin']['controllers']['index']['methods']['new'] = '_new';
+$conf['admin']['controllers']['index']['methods']['new'] = 'tralala';
 
 
 $conf['*']['namespace'] = 'Controllers';

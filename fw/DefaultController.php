@@ -47,7 +47,11 @@ class DefaultController {
         
         if ($this->session->isLogged)
         {
+            $this->view->id = $this->session->id;
             $this->view->username = $this->session->username;
+            $this->view->isAdmin = $this->session->isAdmin;
+            $this->view->isEditor = $this->session->isEditor;
+            $this->view->isModerator = $this->session->isModerator;
         }
     }
     

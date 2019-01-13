@@ -17,6 +17,9 @@
                             <li><a href="/signin">Link / Register</a></li>
                         <?php } else { ?>
                             <li><a href="/cart">Card</a></li>
+                            <?php if ($this->isAdmin) { ?>
+                                <li><a href="/admin">Admin</a></li>
+                            <?php } ?>
                             <li><a href="/profile"><?php echo $this->username;?></a></li>
                             <li><a href="/profile/logout">[Logout]</a></li>
                         <?php } ?>
