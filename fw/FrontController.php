@@ -12,6 +12,7 @@ class FrontController {
     private $namespace = null;
     private $controller = null;
     private $method = null;
+    private $params = null;
     private $_requestMethod = null;
     
     /**
@@ -128,7 +129,7 @@ class FrontController {
         $methodVar = array($newController, $this->method);
         
         if (is_callable($methodVar)) {
-            $newController->{$this->method}();
+            $newController->{$this->method}($this->params);
         } else {
             App::getInstance()->displayError(404, 'Page not found!');
             exit;
