@@ -18,8 +18,18 @@ class Categories {
     {
         $db = new \FW\Db\SimpleDb();
         
-        $db->prepare("INSERT INTO `categories` (`name`) VALUES (?)", 
+        $db->prepare("INSERT INTO categories (name) VALUES (?)",
         [$model->getName()])->execute();
+
+        return ['success' => 1, 'message' => ''];
+    }
+
+    public static function edit(\Models\BindingModels\Admin\EditCategory $model)
+    {
+        $db = new \FW\Db\SimpleDb();
+
+        $db->prepare("UPDATE categories SET name = ? WHERE id = ?",
+            [$model->getName(), $model->getID()])->execute();
 
         return ['success' => 1, 'message' => ''];
     }
@@ -28,7 +38,7 @@ class Categories {
     {
         $db = new \FW\Db\SimpleDb();
         
-        $db->prepare("DELETE FROM `categories` WHERE `id` = (?)", [$id])->execute();
+        $db->prepare("DELETE FROM categories WHERE id = (?)", [$id])->execute();
 
         return ['success' => 1, 'message' => ''];
     }

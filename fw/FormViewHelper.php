@@ -24,14 +24,6 @@ class FormViewHelper
         return self::$_instance;
     }
 
-    public function initTextBox()
-    {
-        $this->_elements[$this->_currentElementId]['opening tag'] = '<input type="text"';
-        $this->_elements[$this->_currentElementId]['closing tag'] = '>';
-
-        return $this;
-    }
-
     public function initForm($action, $attributes = array(), $method = 'post')
     {
         if ($this->_currentElementId != 0) {
@@ -48,6 +40,14 @@ class FormViewHelper
             $this->_additionalTokens[$method] = '<input type="hidden" name="_method" value="' . $method . '">';
             $this->_elements['form']['method'] = "post";
         }
+
+        return $this;
+    }
+
+    public function initTextBox($value = '')
+    {
+        $this->_elements[$this->_currentElementId]['opening tag'] = '<input type="text" value="'.$value.'"';
+        $this->_elements[$this->_currentElementId]['closing tag'] = '>';
 
         return $this;
     }

@@ -1,8 +1,6 @@
 <?php
-
 namespace FW;
 
-use FW\InputData as InputData;
 use FW\Common as Common;
 
 class InputData {

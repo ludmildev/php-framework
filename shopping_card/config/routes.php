@@ -11,17 +11,13 @@ $conf['admin']['controllers']['categories']['to'] = 'categories';
 $conf['*']['namespace'] = 'Controllers';
 
 $conf['*']['controllers']['index']['to'] = 'index';
-
 $conf['*']['controllers']['products']['to'] = 'products';
-
 $conf['*']['controllers']['signin']['to'] = 'signin';
 $conf['*']['controllers']['signup']['to'] = 'signin';
-
 $conf['*']['controllers']['user']['to'] = 'user';
-
 $conf['*']['controllers']['categories']['to'] = 'categories';
+$conf['*']['controllers']['categories']['methods']['*'] = 'index';
 $conf['*']['controllers']['profile']['to'] = 'profile';
 $conf['*']['controllers']['cart']['to'] = 'cart';
-
 
 return $conf;

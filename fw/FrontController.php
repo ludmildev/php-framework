@@ -2,7 +2,6 @@
 namespace FW;
 
 use FW\App as App;
-use FW\FrontController as FrontController;
 use FW\Routers\IRouter as IRouter;
 use FW\InputData as InputData;
 
@@ -110,16 +109,23 @@ class FrontController {
 
         if (is_array($_defaultConfigRoutes) && !empty($_defaultConfigRoutes['controllers']))
         {
-            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method])) {
-                $this->method = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method]);
-            }
-
-            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['to']))
-                $this->controller = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['to']);
-
             if (empty($_defaultConfigRoutes['controllers'][strtolower($this->controller)])) {
                 App::getInstance()->displayError(404, 'Page not found');
                 exit;
+            }
+            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['to']))
+                $this->controller = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['to']);
+
+            if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['methods']['*'])) {
+                if (!empty($this->params)) {
+                    array_unshift($this->params, $this->method);
+                } else {
+                    $this->params[] = $this->method;
+                }
+                $this->method = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['methods']['*']);
+            }
+            else if (!empty($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method])) {
+                $this->method = strtolower($_defaultConfigRoutes['controllers'][$this->controller]['methods'][$this->method]);
             }
         }
         $input->setPost($this->router->getPost());

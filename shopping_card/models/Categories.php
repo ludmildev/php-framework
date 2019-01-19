@@ -7,10 +7,17 @@ class Categories {
     {
         $db = new \FW\Db\SimpleDb();
         
-        $categories = $db->prepare("
-        SELECT id, name
-        FROM categories")->execute()->fetchAllAssoc();
-        
-        return $categories;
+        return $db->prepare("SELECT id, name FROM categories")->execute()->fetchAllAssoc();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getCategoryByID($id)
+    {
+        $db = new \FW\Db\SimpleDb();
+
+        return $db->prepare("SELECT id, name FROM categories WHERE id = ?", [(int)$id])->execute()->fetchAllAssoc();
     }
 }

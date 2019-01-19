@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use FW\DefaultController as DefaultController;
+use FW\DefaultController;
 
 class Index extends DefaultController {
     

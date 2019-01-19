@@ -5,7 +5,7 @@
             <div class="btn btn-default" style="margin-bottom: 10px;">
                 <?php echo $categori['name']; ?>
                 <a href="/categories/show/<?php echo $categori['id']; ?>/0/5">[view]</a>
-                <a href="/admin/categories/edit/<?php echo $categori['id']; ?>">[edit]</a>
+                <a href="/admin/categories/get/<?php echo $categori['id']; ?>">[edit]</a>
                 <a style="color:red;" href="/admin/categories/delete/<?php echo $categori['id']; ?>">[delete]</a>
             </div>
         <?php endforeach; ?>
